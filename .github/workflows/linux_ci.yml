@@ -62,17 +62,17 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive ACCEPT_EULA=Y apt-get install -y rsyslog curl zip unzip tar libssl-dev libcurl4-openssl-dev libunwind-dev git cmake ninja-build gdb protobuf-compiler libsodium-dev libgflags-dev libprotobuf-dev libutempter-dev g++ net-tools lsof
+          sudo apt-get update
+          DEBIAN_FRONTEND=noninteractive ACCEPT_EULA=Y sudo apt-get install -y rsyslog curl zip unzip tar libssl-dev libcurl4-openssl-dev libunwind-dev git cmake ninja-build gdb protobuf-compiler libsodium-dev libgflags-dev libprotobuf-dev libutempter-dev g++ net-tools lsof
           echo "KEYGEN"
-          netstat -nlp | grep :22
-          sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
-          echo "LogLevel DEBUG3" >> /etc/ssh/sshd_config
+          sudo netstat -nlp | grep :22
+          sudo sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
+          sudo echo "LogLevel DEBUG3" >> /etc/ssh/sshd_config
           #echo "Port 2222" >> /etc/ssh/sshd_config
-          service rsyslog restart
-          service ssh restart
-          cat /var/log/auth.log
-          cat /etc/ssh/sshd_config
+          sudo service rsyslog restart
+          sudo service ssh restart
+          sudo cat /var/log/auth.log
+          sudo cat /etc/ssh/sshd_config
           ssh-keygen -t rsa -f ~/.ssh/id_rsa -P "" -N ""
           echo "KEYGEN"
           cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
