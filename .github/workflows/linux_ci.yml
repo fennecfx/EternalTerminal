@@ -67,7 +67,7 @@ jobs:
           echo "KEYGEN"
           sudo netstat -nlp | grep :22
           sudo sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
-          sudo echo "LogLevel DEBUG3" >> /etc/ssh/sshd_config
+          #sudo echo "LogLevel DEBUG3" >> /etc/ssh/sshd_config
           #echo "Port 2222" >> /etc/ssh/sshd_config
           sudo service rsyslog restart
           sudo service ssh restart
